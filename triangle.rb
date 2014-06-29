@@ -14,9 +14,17 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  a, b, c = [a, b, c].sort
+  raise TriangleError if a <= 0 or a + b <= c
+  return :equilateral if a == c
+  return :isosceles if a == b or b == c
+  return :scalene
 end
+
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
+	assert_raise(TriangleError) do
+		raise TriangleError.new("Something is wrong with your sides!")
+	end
 end
