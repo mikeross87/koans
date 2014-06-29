@@ -24,7 +24,7 @@ end
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
-	assert_raise(TriangleError) do
+	def TriangleError
 		raise TriangleError.new("Something is wrong with your sides!")
 	end
 end
