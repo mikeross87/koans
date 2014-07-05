@@ -30,7 +30,18 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+  calculator = ->(no, group_multipler, individual_multipler) { (no / 3 * group_multipler) + (no % 3 * individual_multipler) }
+  dice.group_by {|i| i % 7 }.inject(0) do |total, (value, scores)|
+    group_multipler, individual_multipler = case value
+    when 1
+      [1000, 100]
+    when 5
+      [500, 50]
+    else 
+      [value * 100, 0]
+    end
+    total += calculator.call(scores.size, group_multipler, individual_multipler)
+  end
 end
 
 class AboutScoringProject < Neo::Koan
